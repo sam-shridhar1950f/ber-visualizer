@@ -1,7 +1,3 @@
-# Calculate the BER for every dataset. 
-# 1st Option: Observe BER change as variable is manipulated (like observe the BER as salinity is increased)
-# 2nd Option: Calculate the average BER of each category and compare them to each other. Gauge which category has the greatest effect on BER.
-# If BER decreases as variable is manipulated, understand why by comparing mean blue light intensity between the first variable manipulation versus the current one. Prove that the mean blue light intensity decreases, affecting clearly transmitted bits
 import pandas as pd
 
 
