@@ -330,21 +330,3 @@ elif option == "average":
     averages()
 else:
     print("Invalid option chosen")
-
-
-            
-
-
-    
-
-#temperature(TEMPERATURE_PAIRS)
-#transmissionrate(TRANSMISSIONRATE_PAIRS)
-#pH(PH_PAIRS)
-
-
-
-
-
-
-
-
