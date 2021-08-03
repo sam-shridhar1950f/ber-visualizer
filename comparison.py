@@ -1,14 +1,7 @@
 import pandas as pd
 
-
-
-# datasets = {
-#      "transmitter": pd.read_csv(r"C:\vlcchanges\underwatervlc\logData\temperature_48c_30Hz_60fps_transmitter3.csv"),
-#      "receiver": pd.read_csv(r"C:\vlcchanges\underwatervlc\logData\temperature_48c_30Hz_60fps_receiver3.csv")
-#  }
-
 def getTransmissionStart(recRatio, transmitter, receiver, precision):
-   # print(recRatio)
+   
     
     string = ""
     recRatio = int(recRatio)
@@ -31,10 +24,9 @@ def getTransmissionStart(recRatio, transmitter, receiver, precision):
     
 
 def getBer(transmitterbits, receiverbits, transmission_rate, fps, precision):
-    # transmission_rate = int(input("Enter the transmission rate of the video: "))
-    # fps = int(input("Enter the fps of the video: "))
+    
 
-    recRatio = int(fps / transmission_rate) # am I supposed to flip this? Getting float but supposed to be an integer. Ask Shardul.
+    recRatio = int(fps / transmission_rate) 
 
     vecOverflow = False
 
@@ -62,13 +54,12 @@ def getBer(transmitterbits, receiverbits, transmission_rate, fps, precision):
         if iSucc >= recRatio/2:
             success += 1
     
-    # if vecOverflow:
-    #     print("Transmission Failed\n")
+
 
     return success/len(transmitterbits) * 100
 
 
-#print(getBer(datasets["transmitter"]["bit"], datasets["receiver"]["Bit"]))
+
 
 
 
