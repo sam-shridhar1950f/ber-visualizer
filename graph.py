@@ -44,14 +44,14 @@ for i in range(0, len(REL_PATHS_LIST)):
         break
     if not REL_PATHS_LIST:
         break
-    # print(REL_PATHS_LIST[i].split("_"))
+    
     parameter = str(REL_PATHS_LIST[ind_1].split("_")[1])
     category = REL_PATHS_LIST[ind_1].split("_")[0] # transmissionrate
     end_type = REL_PATHS_LIST[ind_1].split("_")[-1][:-4]
     if end_type[:-1] == "receiver": 
         for j in range(0, len(REL_PATHS_LIST) ):
             
-           # print(REL_PATHS_LIST[j])
+          
             if not REL_PATHS_LIST:
                 break
             if first:
@@ -59,7 +59,7 @@ for i in range(0, len(REL_PATHS_LIST)):
             else:
                 ind += 1
             
-            category_transmit = REL_PATHS_LIST[ind].split("_")[0] # transmissionrate
+            category_transmit = REL_PATHS_LIST[ind].split("_")[0] 
             end_type_transmit = REL_PATHS_LIST[ind].split("_")[-1][:-4]
             if category_transmit == category and end_type_transmit[:-1] == "transmitter" and end_type[-1] == end_type_transmit[-1]:
                 if category == "transmissionrate":
@@ -85,9 +85,8 @@ for i in range(0, len(REL_PATHS_LIST)):
                 ind = j
             else:
                 ind += 1
-            # print(ind)
-            # print(REL_PATHS_LIST)
-            category_transmit = REL_PATHS_LIST[ind].split("_")[0] # transmissionrate
+        
+            category_transmit = REL_PATHS_LIST[ind].split("_")[0] 
             end_type_transmit = REL_PATHS_LIST[ind].split("_")[-1][:-4]
             if category_transmit == category and end_type_transmit[:-1] == "receiver" and end_type[-1] == end_type_transmit[-1]:
                 if category == "transmissionrate":
@@ -193,12 +192,7 @@ def transmissionrate(pairs):
         plt.ylabel("Bit Error Rate")
         plt.title("Bit Error Rate VS. Transmission Rate")
         plt.show()
-    # inv_map = dict(reversed(list(TEMPERATURE_PAIRS.items())))
-    # print(inv_map)
-
-    # TODO: 
-    # * Derive transmission rate and fps from filename
-    # * Make dictionary key parameter + frequency not just parameter
+    
 
 def pH(pairs):
     original = dict(copy.deepcopy(pairs))
