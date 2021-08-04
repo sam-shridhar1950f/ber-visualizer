@@ -39,7 +39,8 @@ This is an example of how to list things you need to use the software and how to
 2. All CSV files MUST follow a naming convention.
    
      - _Name Template: 'GraphType_Parameter_TransmissionRate_FPS_TransmitterOrReceiverID.csv_
-    -  _Name Example: 'temperature_40c_25Hz_100fps_receiver2.csv'_
+        * ID is simply 
+    -  _Name Example: 'temperature_40c_25Hz_100fps_receiver1.csv'_
    
    
 
