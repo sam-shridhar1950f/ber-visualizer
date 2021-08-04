@@ -37,14 +37,14 @@ This is an example of how to list things you need to use the software and how to
 
 1. Start with placing the CSV data files into the folder 'logData.'
 2. All CSV files MUST follow a naming convention.
-   
+   ```
      - _Name Template: 'GraphType_Parameter_TransmissionRate_FPS_TransmitterOrReceiverID.csv'_
         * _ID_ is an nonnegative integer that pairs together corresponding transmitter and receiver files.
     -  _Name Example: 'temperature_40c_25Hz_100fps_receiver1.csv'_
 
     - _Pair Example: (Transmitter): 'transmissionrate_50Hz_50Hz_100fps_transmitter4.csv'_
     - _Pair Example: (Receiver): 'transmissionrate_50Hz_50Hz_100fps_receiver4.csv'_
-    
+    ```
 
 _For more examples, please refer to the [Documentation](https://example.com)_
 
