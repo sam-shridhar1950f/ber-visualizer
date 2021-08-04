@@ -39,8 +39,8 @@ This is an example of how to list things you need to use the software and how to
 2. All CSV files MUST follow a naming convention.
    
    ```Name Template: 'GraphType_Parameter_TransmissionRate_FPS_TransmitterOrReceiverID.csv```
-     ``` Name Example: 'temperature_40c_25Hz_100fps_receiver2.csv'
-   ```
+   ``` Name Example: 'temperature_40c_25Hz_100fps_receiver2.csv'```
+   
    
 
 
