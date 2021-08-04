@@ -38,8 +38,8 @@ This is an example of how to list things you need to use the software and how to
 1. Start with placing the CSV data files into the folder 'logData.'
 2. All CSV files MUST follow a naming convention.
    
-   ```Name Template: 'GraphType_Parameter_TransmissionRate_FPS_TransmitterOrReceiverID.csv
-      Name Example: 'temperature_40c_25Hz_100fps_receiver2.csv'
+   ```Name Template: 'GraphType_Parameter_TransmissionRate_FPS_TransmitterOrReceiverID.csv```
+     ``` Name Example: 'temperature_40c_25Hz_100fps_receiver2.csv'
    ```
    
 
