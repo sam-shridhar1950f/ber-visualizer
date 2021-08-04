@@ -22,12 +22,11 @@ This is an example of how to list things you need to use the software and how to
 
 ## Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clone the repo
    ```sh
    git clone https://github.com/sam-shridhar1950f/ber-visualizer.git
    ```
-3. Install pip packages (listed in prerequisites)
+2. Install pip packages (listed in prerequisites)
    ```sh
    pip install
    ```
@@ -51,12 +50,12 @@ This is an example of how to list things you need to use the software and how to
 <br>
 <img src="https://github.com/sam-shridhar1950f/ber-visualizer/blob/photos/terminal.PNG?raw=true"></img>
 4. Select your graph option. 
-         <br></br>
-         <br></br>
-          - _'transmissionrate', 'temperature', 'pH', 'turbidity', 'salinity' will graph the BER of all data files within the respective category._
+         <br>
+         <br>
+          - 'transmissionrate', 'temperature', 'pH', 'turbidity', 'salinity' will graph the BER of all data files within the respective category.
            <br>
            <br>
-          - _'average' will display a graph with the average BER of every category existing in the logData directory_
+          - 'average' will display a graph with the average BER of every category existing in the logData directory
 <br>
 <br>
 <img src="https://github.com/sam-shridhar1950f/ber-visualizer/blob/photos/graph.png?raw=true"></img>
