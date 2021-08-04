@@ -71,7 +71,7 @@ This section should list any major frameworks that you built your project using.
 ### Prerequisites
 
 This is an example of how to list things you need to use the software and how to install them.
-* npm
+* pip
   ```sh
   pip install pandas
   pip install matplotlib
