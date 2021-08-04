@@ -50,8 +50,8 @@ This is an example of how to list things you need to use the software and how to
 3. Run **graph.py.**
 <img src="https://github.com/sam-shridhar1950f/ber-visualizer/blob/photos/terminal.PNG?raw=true">
 4. Select your graph option. 
-    - 'transmissionrate', 'temperature', 'pH', 'turbidity', 'salinity' will graph the BER of all data files within the respective category.
-     - 'average' will display a graph with the average BER of every category existing in the logData directory
+          - 'transmissionrate', 'temperature', 'pH', 'turbidity', 'salinity' will graph the BER of all data files within the respective category.
+          - 'average' will display a graph with the average BER of every category existing in the logData directory
 <br>
 <br>
 <img src="https://github.com/sam-shridhar1950f/ber-visualizer/blob/photos/graph.png?raw=true">
