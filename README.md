@@ -46,6 +46,7 @@ This is an example of how to list things you need to use the software and how to
     - _Pair Example: (Receiver): 'transmissionrate_50Hz_50Hz_100fps_receiver4.csv'_
 
     Example logData folder:
+    <img src="https://github.com/sam-shridhar1950f/ber-visualizer/blob/photos/folderStructure.PNG?raw=true">
     
    
 
