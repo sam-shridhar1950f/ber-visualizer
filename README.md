@@ -58,7 +58,7 @@
 <br>
 <br>
 <img src="https://github.com/sam-shridhar1950f/ber-visualizer/blob/photos/graph.png?raw=true"></img>
-5. The graph will generate!
+5. The graph will generate.
    
 
 
