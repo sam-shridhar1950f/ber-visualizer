@@ -51,7 +51,9 @@ This is an example of how to list things you need to use the software and how to
 <img src="https://github.com/sam-shridhar1950f/ber-visualizer/blob/photos/terminal.PNG?raw=true">
 4. Select your graph option. 
          <br>
+         <br>
           - 'transmissionrate', 'temperature', 'pH', 'turbidity', 'salinity' will graph the BER of all data files within the respective category.
+           <br>
            <br>
           - 'average' will display a graph with the average BER of every category existing in the logData directory
 <br>
