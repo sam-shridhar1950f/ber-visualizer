@@ -51,8 +51,8 @@ This is an example of how to list things you need to use the software and how to
 <br>
 <img src="https://github.com/sam-shridhar1950f/ber-visualizer/blob/photos/terminal.PNG?raw=true"></img>
 4. Select your graph option. 
-         <br>
-         <br>
+         <br></br>
+         <br></br>
           - _'transmissionrate', 'temperature', 'pH', 'turbidity', 'salinity' will graph the BER of all data files within the respective category._
            <br>
            <br>
