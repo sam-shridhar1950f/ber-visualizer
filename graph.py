@@ -6,7 +6,7 @@ import pandas as pd
 from comparison import getBer
 
 
-directory = r'C:\vlcchanges\underwatervlc\logData'
+directory = r'C:\vlcchanges\underwatervlc\logData' 
 json_file = open ('config.json', "r")
 config = json.load(json_file)
 precision = int(config["precision"])
@@ -44,14 +44,12 @@ for i in range(0, len(REL_PATHS_LIST)):
         break
     if not REL_PATHS_LIST:
         break
-    
+    # print(REL_PATHS_LIST[i].split("_"))
     parameter = str(REL_PATHS_LIST[ind_1].split("_")[1])
     category = REL_PATHS_LIST[ind_1].split("_")[0] # transmissionrate
     end_type = REL_PATHS_LIST[ind_1].split("_")[-1][:-4]
     if end_type[:-1] == "receiver": 
         for j in range(0, len(REL_PATHS_LIST) ):
-            
-          
             if not REL_PATHS_LIST:
                 break
             if first:
@@ -59,7 +57,7 @@ for i in range(0, len(REL_PATHS_LIST)):
             else:
                 ind += 1
             
-            category_transmit = REL_PATHS_LIST[ind].split("_")[0] 
+            category_transmit = REL_PATHS_LIST[ind].split("_")[0] # transmissionrate
             end_type_transmit = REL_PATHS_LIST[ind].split("_")[-1][:-4]
             if category_transmit == category and end_type_transmit[:-1] == "transmitter" and end_type[-1] == end_type_transmit[-1]:
                 if category == "transmissionrate":
@@ -85,8 +83,9 @@ for i in range(0, len(REL_PATHS_LIST)):
                 ind = j
             else:
                 ind += 1
-        
-            category_transmit = REL_PATHS_LIST[ind].split("_")[0] 
+            # print(ind)
+            # print(REL_PATHS_LIST)
+            category_transmit = REL_PATHS_LIST[ind].split("_")[0] # transmissionrate
             end_type_transmit = REL_PATHS_LIST[ind].split("_")[-1][:-4]
             if category_transmit == category and end_type_transmit[:-1] == "receiver" and end_type[-1] == end_type_transmit[-1]:
                 if category == "transmissionrate":
@@ -119,7 +118,14 @@ def normalize(pairs):
 def x_values(sorted_dict):
     x_vals = []
     for key in sorted_dict:
-        x_vals.append(key)
+        if "c" in key:
+            noKey = key.replace("c", "")
+            x_vals.append(noKey)
+        elif "Hz" in key:
+            noKey = key.replace("Hz", "")
+            x_vals.append(noKey)
+        else:
+            x_vals.append(key)
     return x_vals
 
 def y_values(sorted_dict):
@@ -135,9 +141,7 @@ def extractDigits(string):
             newstr += l
     return int(newstr)
 
-
-
-                    
+             
 def temperature(pairs):
     original = dict(copy.deepcopy(pairs))
     type = "temperature"
@@ -153,17 +157,15 @@ def temperature(pairs):
 
     plot_type = str(input("Plot type: "))
     if plot_type.lower() == "scatter":
-        plt.scatter(x_vals ,y_vals)
-        plt.title(type)
+        plt.scatter(x_vals,y_vals)
         plt.xlabel('Temperature')
-        plt.ylabel('Bit Error Rate')
+        plt.ylabel('Bit Error Rate (%)')
         plt.show()
     elif plot_type.lower() == "bar":
-        plt.bar(list(pairs.keys()), list(pairs.values()), color ='blue',
+        plt.bar(x_vals, list(pairs.values()), color ='blue',
         width = 0.4)
         plt.xlabel("Temperature (C)")
-        plt.ylabel("Bit Error Rate")
-        plt.title("Bit Error Rate VS. Temperature")
+        plt.ylabel("Bit Error Rate (%) ")
         plt.show()
 
 def transmissionrate(pairs):
@@ -181,19 +183,16 @@ def transmissionrate(pairs):
     plot_type = str(input("Plot type: "))
     if plot_type.lower() == "scatter":
         plt.scatter(x_vals ,y_vals)
-        plt.title("Bit Error Rate VS. Transmission Rate")
         plt.xlabel('Transmission Rate')
         plt.ylabel('Bit Error Rate')
         plt.show()
     elif plot_type.lower() == "bar":
-        plt.bar(list(pairs.keys()), list(pairs.values()), color ='blue',
+        plt.bar(x_vals, list(pairs.values()), color ='blue',
         width = 0.4)
         plt.xlabel("Transmission Rate (Hz)")
-        plt.ylabel("Bit Error Rate")
-        plt.title("Bit Error Rate VS. Transmission Rate")
+        plt.ylabel("Bit Error Rate (%)")
         plt.show()
     
-
 def pH(pairs):
     original = dict(copy.deepcopy(pairs))
     normalize(pairs)
@@ -211,14 +210,13 @@ def pH(pairs):
         plt.scatter(x_vals ,y_vals)
         plt.title("Bit Error Rate VS. pH")
         plt.xlabel('pH')
-        plt.ylabel('Bit Error Rate')
+        plt.ylabel('Bit Error Rate (%)')
         plt.show()
     elif plot_type.lower() == "bar":
-        plt.bar(list(pairs.keys()), list(pairs.values()), color ='blue',
+        plt.bar(x_vals, list(pairs.values()), color ='blue',
         width = 0.4)
         plt.xlabel("Transmission Rate (Hz)")
-        plt.ylabel("Bit Error Rate")
-        plt.title("Bit Error Rate VS. pH")
+        plt.ylabel("Bit Error Rate (%)")
         plt.show() 
 
 def salinity(pairs):
@@ -236,16 +234,14 @@ def salinity(pairs):
     plot_type = str(input("Plot type: "))
     if plot_type.lower() == "scatter":
         plt.scatter(x_vals ,y_vals)
-        plt.title("Bit Error Rate VS. Salinity")
         plt.xlabel('Salinity')
-        plt.ylabel('Bit Error Rate')
+        plt.ylabel('Bit Error Rate (%)')
         plt.show()
     elif plot_type.lower() == "bar":
-        plt.bar(list(pairs.keys()), list(pairs.values()), color ='blue',
+        plt.bar(x_vals, list(pairs.values()), color ='blue',
         width = 0.4)
         plt.xlabel("Transmission Rate (Hz)")
-        plt.ylabel("Bit Error Rate")
-        plt.title("Bit Error Rate VS. Salinity")
+        plt.ylabel("Bit Error Rate (%)")
         plt.show()   
 
 def turbidity(pairs):
@@ -263,16 +259,14 @@ def turbidity(pairs):
     plot_type = str(input("Plot type: "))
     if plot_type.lower() == "scatter":
         plt.scatter(x_vals ,y_vals)
-        plt.title("Bit Error Rate VS. Turbidity")
         plt.xlabel('Turbidity')
-        plt.ylabel('Bit Error Rate')
+        plt.ylabel('Bit Error Rate (%)')
         plt.show()
     elif plot_type.lower() == "bar":
-        plt.bar(list(pairs.keys()), list(pairs.values()), color ='blue',
+        plt.bar(x_vals, list(pairs.values()), color ='blue',
         width = 0.4)
         plt.xlabel("Transmission Rate (Hz)")
-        plt.ylabel("Bit Error Rate")
-        plt.title("Bit Error Rate VS. Turbidity")
+        plt.ylabel("Bit Error Rate (%)")
         plt.show()
 
 def averages():
@@ -300,7 +294,7 @@ def averages():
         i += 1
         avg = sum(pair.values()) / len(pair)
         new_pairs.append({names[i]: avg})
-        print(pair)
+       
     
     for val in new_pairs:
         x_vals.append(next(iter(val)))
@@ -309,12 +303,13 @@ def averages():
     plt.bar(x_vals, y_vals, color ='blue',
         width = 0.4)
     plt.xlabel("Method")
-    plt.ylabel("Bit Error Rate")
-    plt.title("Bit Error Rate VS. Modulated Variable")
+    plt.ylabel("Average Bit Error Rate (%)")
     plt.show()
 
 print("This tool is for analyzing the BERs as they relate to the various variables the VLC system was tested with.\n1. transmissionrate\n2. temperature\n3. pH\n4. Turbidity\n5. Salinity\n6. Average (compares the average BER of each category.) ")
 option = input("Enter your selection: ")
+
+
 
 if option == "transmissionrate":
     transmissionrate(TRANSMISSIONRATE_PAIRS)
@@ -328,5 +323,7 @@ elif option == "salinity":
     salinity(SALINITY_PAIRS)
 elif option == "average":
     averages()
+elif option.lower() == "break":
+    cont = False
 else:
     print("Invalid option chosen")
