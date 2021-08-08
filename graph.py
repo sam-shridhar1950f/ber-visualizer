@@ -2,11 +2,13 @@ import os
 import copy
 import json
 import matplotlib.pyplot as plt
+import numpy as np
 import pandas as pd
 from comparison import getBer
 
 
-directory = r'C:\vlcchanges\underwatervlc\logData' 
+
+directory = r'C:\vlcchanges\underwatervlc\logData'
 json_file = open ('config.json', "r")
 config = json.load(json_file)
 precision = int(config["precision"])
@@ -141,6 +143,13 @@ def extractDigits(string):
             newstr += l
     return int(newstr)
 
+def errorCalc(y_vals):
+    stds_list = []
+    for val in y_vals:
+        print(val)
+        stds_list.append(np.std(val))
+    return stds_list
+        
              
 def temperature(pairs):
     original = dict(copy.deepcopy(pairs))
@@ -154,7 +163,8 @@ def temperature(pairs):
         pairs[key] = ber
     x_vals = x_values(dict(sorted(pairs.items())))
     y_vals =  y_values(dict(sorted(pairs.items())))
-
+    stds_list = errorCalc(y_vals)
+    print(stds_list)
     plot_type = str(input("Plot type: "))
     if plot_type.lower() == "scatter":
         plt.scatter(x_vals,y_vals)
@@ -162,7 +172,7 @@ def temperature(pairs):
         plt.ylabel('Bit Error Rate (%)')
         plt.show()
     elif plot_type.lower() == "bar":
-        plt.bar(x_vals, list(pairs.values()), color ='blue',
+        plt.bar(x_vals, list(pairs.values()), yerr=stds_list, color ='blue',
         width = 0.4)
         plt.xlabel("Temperature (C)")
         plt.ylabel("Bit Error Rate (%) ")
@@ -275,6 +285,7 @@ def averages():
     new_pairs = []
     x_vals = []
     y_vals = []
+    stds = []
     i = -1
         
 
@@ -293,14 +304,16 @@ def averages():
             continue
         i += 1
         avg = sum(pair.values()) / len(pair)
+        std = np.std(list(pair.values()))
+        stds.append(std)
         new_pairs.append({names[i]: avg})
-       
+    print(stds)
     
     for val in new_pairs:
         x_vals.append(next(iter(val)))
         y_vals.append(next(iter(val.items()))[1])
 
-    plt.bar(x_vals, y_vals, color ='blue',
+    plt.bar(x_vals, y_vals, color ='blue', yerr=stds, capsize=5,
         width = 0.4)
     plt.xlabel("Method")
     plt.ylabel("Average Bit Error Rate (%)")
