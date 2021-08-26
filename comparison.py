@@ -1,7 +1,14 @@
-import pandas as pd
+
+
+
+
+# datasets = {
+#      "transmitter": pd.read_csv(r"C:\vlcchanges\underwatervlc\logData\temperature_48c_30Hz_60fps_transmitter3.csv"),
+#      "receiver": pd.read_csv(r"C:\vlcchanges\underwatervlc\logData\temperature_48c_30Hz_60fps_receiver3.csv")
+#  }
 
 def getTransmissionStart(recRatio, transmitter, receiver, precision):
-   
+   # print(recRatio)
     
     string = ""
     recRatio = int(recRatio)
@@ -18,13 +25,12 @@ def getTransmissionStart(recRatio, transmitter, receiver, precision):
 
     receiverString = string
     found = receiverString.find(startPattern)
-    #print(found)
+  
     return found if found else -1
 
     
 
 def getBer(transmitterbits, receiverbits, transmission_rate, fps, precision):
-    
 
     recRatio = int(fps / transmission_rate) 
 
@@ -53,8 +59,6 @@ def getBer(transmitterbits, receiverbits, transmission_rate, fps, precision):
 
         if iSucc >= recRatio/2:
             success += 1
-    
-
 
     return success/len(transmitterbits) * 100
 
