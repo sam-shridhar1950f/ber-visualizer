@@ -8,8 +8,8 @@ from comparison import getBer
 
 
 
-directory = r'C:\vlcchanges\underwatervlc\logData'
-json_file = open ('config.json', "r")
+directory = r'C:\vlcchanges\underwatervlc\python\logData'
+json_file = open (r'C:\vlcchanges\underwatervlc\python\graph-generator\config.json', "r")
 config = json.load(json_file)
 precision = int(config["precision"])
 
@@ -24,7 +24,7 @@ SALINITY_PAIRS = {}
 PH_PAIRS = {}
 TEMPERATURE_PAIRS = {}
 TURBIDITY_PAIRS = {}
-
+h = 0
 first = True
 ind = -1
 for entry in os.scandir(directory):
@@ -51,44 +51,48 @@ for i in range(0, len(REL_PATHS_LIST)):
     category = REL_PATHS_LIST[ind_1].split("_")[0] # transmissionrate
     end_type = REL_PATHS_LIST[ind_1].split("_")[-1][:-4]
     if end_type[:-1] == "receiver": 
-        for j in range(0, len(REL_PATHS_LIST) ):
-            if not REL_PATHS_LIST:
-                break
-            if first:
+        for j in range(0, len(COPY_REL_PATHS_LIST) ):
+            
+            if len(REL_PATHS_LIST) == 2 and h < 1:
+                ind = 0
+                h += 1
+            elif first:
                 ind = j
+            
             else:
                 ind += 1
             
-            category_transmit = REL_PATHS_LIST[ind].split("_")[0] # transmissionrate
-            end_type_transmit = REL_PATHS_LIST[ind].split("_")[-1][:-4]
+            category_transmit = COPY_REL_PATHS_LIST[j].split("_")[0] # transmissionrate
+            end_type_transmit = COPY_REL_PATHS_LIST[j].split("_")[-1][:-4]
             if category_transmit == category and end_type_transmit[:-1] == "transmitter" and end_type[-1] == end_type_transmit[-1]:
                 if category == "transmissionrate":
                     start_path = "\\".join(rel[:-1])
                     # print(start_path)
-                    TRANSMISSIONRATE_PAIRS[parameter] = [start_path + "\\" + REL_PATHS_LIST[ind_1], start_path + "\\" + REL_PATHS_LIST[ind]]
-                    filtered_list = [element for element in REL_PATHS_LIST if element not in [REL_PATHS_LIST[ind_1], REL_PATHS_LIST[ind]]]
+                    TRANSMISSIONRATE_PAIRS[parameter] = [start_path + "\\" + REL_PATHS_LIST[ind_1], start_path + "\\" + COPY_REL_PATHS_LIST[j]]
+                    filtered_list = [element for element in REL_PATHS_LIST if element not in [REL_PATHS_LIST[ind_1], COPY_REL_PATHS_LIST[j]]]
                     REL_PATHS_LIST = filtered_list
+                    ind -= ind
+                    first = False
+                    break
                 if category == "temperature":
                     start_path = "\\".join(rel[:-1])
                     # print(start_path)
-                    TEMPERATURE_PAIRS[parameter] = [start_path + "\\" + REL_PATHS_LIST[ind_1], start_path + "\\" + REL_PATHS_LIST[ind]]
-                    filtered_list = [element for element in REL_PATHS_LIST if element not in [REL_PATHS_LIST[ind_1], REL_PATHS_LIST[ind]]]
+                    TEMPERATURE_PAIRS[parameter] = [start_path + "\\" + REL_PATHS_LIST[ind_1], start_path + "\\" + COPY_REL_PATHS_LIST[j]]
+                    filtered_list = [element for element in REL_PATHS_LIST if element not in [REL_PATHS_LIST[ind_1], COPY_REL_PATHS_LIST[j]]]
                     REL_PATHS_LIST = filtered_list
                     ind -= ind
                     first = False
                     break
     if end_type[:-1] == "transmitter": 
-        for j in range(0, len(REL_PATHS_LIST) ):
-            if not REL_PATHS_LIST:
-                break
+        for j in range(0, len(COPY_REL_PATHS_LIST) ):
             if first:
                 ind = j
             else:
                 ind += 1
             # print(ind)
             # print(REL_PATHS_LIST)
-            category_transmit = REL_PATHS_LIST[ind].split("_")[0] # transmissionrate
-            end_type_transmit = REL_PATHS_LIST[ind].split("_")[-1][:-4]
+            category_transmit = COPY_REL_PATHS_LIST[j].split("_")[0] # transmissionrate
+            end_type_transmit = COPY_REL_PATHS_LIST[j].split("_")[-1][:-4]
             if category_transmit == category and end_type_transmit[:-1] == "receiver" and end_type[-1] == end_type_transmit[-1]:
                 if category == "transmissionrate":
                     start_path = "\\".join(rel[:-1])
@@ -96,6 +100,9 @@ for i in range(0, len(REL_PATHS_LIST)):
                     TRANSMISSIONRATE_PAIRS[parameter] = [start_path + "\\" + REL_PATHS_LIST[j], start_path + "\\" + REL_PATHS_LIST[i]]
                     filtered_list = [element for element in REL_PATHS_LIST if element not in [REL_PATHS_LIST[i], REL_PATHS_LIST[j]]]
                     REL_PATHS_LIST = filtered_list
+                    ind -= ind
+                    first = False
+                    break
                 if category == "temperature":
                     start_path = "\\".join(rel[:-1])
                     # print(start_path)
@@ -146,7 +153,7 @@ def extractDigits(string):
 def errorCalc(y_vals):
     stds_list = []
     for val in y_vals:
-        print(val)
+        #print(val)
         stds_list.append(np.std(val))
     return stds_list
         
@@ -164,7 +171,7 @@ def temperature(pairs):
     x_vals = x_values(dict(sorted(pairs.items())))
     y_vals =  y_values(dict(sorted(pairs.items())))
     stds_list = errorCalc(y_vals)
-    print(stds_list)
+    # print(stds_list)
     plot_type = str(input("Plot type: "))
     if plot_type.lower() == "scatter":
         plt.scatter(x_vals,y_vals)
@@ -307,7 +314,7 @@ def averages():
         std = np.std(list(pair.values()))
         stds.append(std)
         new_pairs.append({names[i]: avg})
-    print(stds)
+    #print(stds)
     
     for val in new_pairs:
         x_vals.append(next(iter(val)))
@@ -318,10 +325,11 @@ def averages():
     plt.xlabel("Method")
     plt.ylabel("Average Bit Error Rate (%)")
     plt.show()
+#print(TEMPERATURE_PAIRS)
+#print(TRANSMISSIONRATE_PAIRS)
 
 print("This tool is for analyzing the BERs as they relate to the various variables the VLC system was tested with.\n1. transmissionrate\n2. temperature\n3. pH\n4. Turbidity\n5. Salinity\n6. Average (compares the average BER of each category.) ")
 option = input("Enter your selection: ")
-
 
 
 if option == "transmissionrate":
